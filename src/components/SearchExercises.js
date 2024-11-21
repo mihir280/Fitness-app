@@ -32,6 +32,7 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
       window.scrollTo({ top: 1800, left: 100, behavior: 'smooth' });
 
       setSearch('');
+      console.log(`the exercise data is ${searchedExercises}`)
       setExercises(searchedExercises);
     }
   };
