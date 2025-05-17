@@ -11,10 +11,10 @@ const ExerciseVideos = ({ exerciseVideos, name }) => {
       <Typography sx={{ fontSize: { lg: '44px', xs: '25px' } }} fontWeight={700} color="#000" mb="33px">
         Watch <span style={{ color: '#FF2625', textTransform: 'capitalize' }}>{name}</span> exercise videos
       </Typography>
-      <Stack 
-        sx={{ flexDirection: { lg: 'row' }, gap: { lg: '110px', xs: '10px' } }} 
-        justifyContent="flex-start" 
-        flexWrap="wrap" 
+      <Stack
+        sx={{ flexDirection: { lg: 'row' }, gap: { lg: '110px', xs: '10px' } }}
+        justifyContent="flex-start"
+        flexWrap="wrap"
         alignItems="center"
       >
         {exerciseVideos.slice(0, 3).map((item, index) => (
@@ -25,10 +25,10 @@ const ExerciseVideos = ({ exerciseVideos, name }) => {
             target="_blank"
             rel="noreferrer"
           >
-            <img 
-              style={{ borderTopLeftRadius: '20px' }} 
-              src={item?.video?.thumbnails?.[0]?.url || '/fallback-image.jpg'} 
-              alt={item?.video?.title || 'Exercise video'} 
+            <img
+              style={{ borderTopLeftRadius: '20px' }}
+              src={item?.video?.thumbnails?.[0]?.url || '/fallback-image.jpg'}
+              alt={item?.video?.title || 'Exercise video'}
             />
             <Box>
               <Typography sx={{ fontSize: { lg: '28px', xs: '18px' } }} fontWeight={600} color="#000">
@@ -46,7 +46,20 @@ const ExerciseVideos = ({ exerciseVideos, name }) => {
 };
 
 ExerciseVideos.propTypes = {
-  exerciseVideos: PropTypes.arrayOf(PropTypes.object).isRequired,
+  exerciseVideos: PropTypes.arrayOf(
+    PropTypes.shape({
+      video: PropTypes.shape({
+        videoId: PropTypes.string,
+        title: PropTypes.string,
+        channelName: PropTypes.string,
+        thumbnails: PropTypes.arrayOf(
+          PropTypes.shape({
+            url: PropTypes.string,
+          }),
+        ),
+      }),
+    }),
+  ).isRequired,
   name: PropTypes.string.isRequired,
 };
 
